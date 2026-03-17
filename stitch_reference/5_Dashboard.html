@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2463eb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>E-Cell Portal - Domain Manager</title>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex">
+<!-- Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col fixed h-full transition-colors">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary rounded-lg p-1.5 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-2xl">hub</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-sm font-bold tracking-tight uppercase">E-Cell Portal</h1>
+<span class="text-[10px] text-slate-500 font-semibold tracking-wider uppercase">Domain Manager</span>
+</div>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 bg-primary/10 border-l-4 border-primary text-primary font-semibold rounded-r-lg group" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined text-[22px]">format_list_bulleted</span>
+<span class="text-sm">All Queries</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined text-[22px]">person_search</span>
+<span class="text-sm">My Queries</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined text-[22px]">add_circle</span>
+<span class="text-sm">Create Query</span>
+</a>
+<div class="pt-4 pb-2 px-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Management</div>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined text-[22px]">admin_panel_settings</span>
+<span class="text-sm">Admin Panel</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-slate-300 overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="User avatar of Rahul Domain Manager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ4zd6clJrrodAaSdtMFsz3VNrkUO6NpZhQb9qJtYivLgfhHC3t4oRUaPA1hq5KhgVlmUgqr2rtmtj5-8q5YUiy4SNfVjL2NDSatvAZVkPoSLdEDqdGKnCE5eg-RK6n6ujKWG0UMxQGKB_tsNmp1HKbvilA-Xq3nLNIdR0byQ1xOK0HWVJZsu9if_beFla9WAc9R4FfNZ-EoC2jP3wFk7KY0v05Wo2fZAW0Roz4v46Zdr3JtzmI6f2mAKjNM5XStP9caYuyfNIiHVo"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="text-xs font-bold truncate">Rahul</span>
+<span class="text-[10px] text-slate-500 truncate">Settings</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-lg ml-auto">more_vert</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col">
+<!-- Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-10 flex items-center justify-between px-8">
+<h2 class="text-lg font-semibold text-slate-800 dark:text-white">Dashboard</h2>
+<div class="flex items-center gap-6">
+<div class="relative cursor-pointer group">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400 group-hover:text-primary transition-colors">notifications</span>
+<span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 border-2 border-white dark:border-slate-900 rounded-full text-[10px] text-white flex items-center justify-center font-bold">3</span>
+</div>
+<div class="h-8 w-[1px] bg-slate-200 dark:border-slate-800"></div>
+<div class="flex items-center gap-3">
+<div class="text-right flex flex-col">
+<span class="text-sm font-bold">Rahul Sharma</span>
+<span class="text-[10px] text-slate-500 font-medium">Domain Manager</span>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary/20 p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="User profile picture Rahul" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJgTlhLbtHOtE7MMJQ0GFCMQi0ElLVddv-DaJpj9uCs9DJqgf5s888999qL3JB3JeY3dyy2_S-kAjPmilkerNIapZ4V1Mn9xni97biKVvYexdDjCxsaYbIJ7whataP63rxznRc4cAnmLPkYvSljPXFOmuoOJDO1kbQ4Of0zdTtWvrPTA87bvyvqR-GgOBFHSL5xk2NPI9N_-GVtbzXsUOxzW7MPJGpTKtpnRXrvj_hNrEoy39IKgGTdi2-FmnnTO4XIsJW5smXEU1e"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Body -->
+<div class="p-8 max-w-7xl mx-auto w-full space-y-8">
+<!-- Welcome Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-2xl font-bold text-slate-900 dark:text-white leading-tight">Good morning, Rahul</h1>
+<p class="text-slate-500 text-sm mt-1">Monday, 23 October 2023 • Domain: Incubation Support</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded text-sm font-semibold flex items-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-lg">download</span> Export Report
+                    </button>
+<button class="px-4 py-2 bg-primary text-white rounded text-sm font-semibold flex items-center gap-2 hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-lg">add</span> New Query
+                    </button>
+</div>
+</div>
+<!-- Metrics Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Open -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-lg shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Open Queries</p>
+<div class="p-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded">
+<span class="material-symbols-outlined text-lg">pending</span>
+</div>
+</div>
+<div class="mt-4 flex items-end justify-between">
+<h3 class="text-3xl font-bold">24</h3>
+<span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-0.5 mb-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +5%
+                        </span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 mt-4 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 45%;"></div>
+</div>
+</div>
+<!-- In Progress -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-lg shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider">In Progress</p>
+<div class="p-1.5 bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded">
+<span class="material-symbols-outlined text-lg">autorenew</span>
+</div>
+</div>
+<div class="mt-4 flex items-end justify-between">
+<h3 class="text-3xl font-bold">12</h3>
+<span class="text-xs font-bold text-rose-600 dark:text-rose-400 flex items-center gap-0.5 mb-1">
+<span class="material-symbols-outlined text-sm">trending_down</span> -2%
+                        </span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 mt-4 rounded-full overflow-hidden">
+<div class="bg-amber-500 h-full rounded-full" style="width: 25%;"></div>
+</div>
+</div>
+<!-- Resolved -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-lg shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Resolved</p>
+<div class="p-1.5 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+</div>
+</div>
+<div class="mt-4 flex items-end justify-between">
+<h3 class="text-3xl font-bold">85</h3>
+<span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-0.5 mb-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +12%
+                        </span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 mt-4 rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full rounded-full" style="width: 75%;"></div>
+</div>
+</div>
+<!-- Closed -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-lg shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Closed</p>
+<div class="p-1.5 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded">
+<span class="material-symbols-outlined text-lg">lock</span>
+</div>
+</div>
+<div class="mt-4 flex items-end justify-between">
+<h3 class="text-3xl font-bold">42</h3>
+<span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-0.5 mb-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +3%
+                        </span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 mt-4 rounded-full overflow-hidden">
+<div class="bg-slate-500 h-full rounded-full" style="width: 60%;"></div>
+</div>
+</div>
+</div>
+<!-- Dashboard Split Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left: Recent Queries -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg shadow-sm overflow-hidden flex flex-col">
+<div class="p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<h4 class="font-bold text-slate-800 dark:text-white">Recent Queries</h4>
+<button class="text-xs font-bold text-primary hover:underline">View All</button>
+</div>
+<div class="flex-1 overflow-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50">
+<th class="px-5 py-3 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Query Title</th>
+<th class="px-5 py-3 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Status</th>
+<th class="px-5 py-3 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Priority</th>
+<th class="px-5 py-3 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Time</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Query 1 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer group">
+<td class="px-5 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Avatar of query requester" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGhECTsRLoXGhTaTNaXkJ2rFkYLLQxEfg20lM1C3hP3rAOokCT-ny6iVAn1QAYysgRZJGx24gWXrPCsAayNMkMX0j7be9S4uhAg-6dZtYzLqOVtoDfWezjxH10FWXWLC0bz3ulTCDQvWk9UEz82EQt8NkuxBHuAPQFv3TBac_Eah8Qd3qpRUc9ti0dyEENpC76F0ZSC7a6V5xT94Xew0q_nryiKiPPF1GR72FlEF9Gz7iTLA5a_M_OVCyX9Ju5wNfhx9YdVS15KWUf"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="text-sm font-bold truncate group-hover:text-primary transition-colors">Workspace allocation for Startup Alpha</span>
+<span class="text-[11px] text-slate-500 font-medium">Domain: Facilities</span>
+</div>
+</div>
+</td>
+<td class="px-5 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 uppercase">Open</span>
+</td>
+<td class="px-5 py-4">
+<span class="inline-flex items-center gap-1 text-[11px] font-bold text-rose-600 dark:text-rose-400">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span> High
+                                        </span>
+</td>
+<td class="px-5 py-4">
+<span class="text-[11px] font-medium text-slate-500 whitespace-nowrap">2h ago</span>
+</td>
+</tr>
+<!-- Query 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer group">
+<td class="px-5 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Avatar of query requester 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBha41NepnoDmQwKVS9zuI0QuaY6wciooKyNUYuL9j4LnPMiC8JxVbYa8PMk807nZ1aWYgGEbdXX6FZZ5LXkrqP2uBHM0l1c2f_VpiSxBsQpvqvZWyThIrlczmNcCKAa99Ck_deuPlMJgn-2OuLib02Js_W1hv0Gq3wzomjDDmZhXVtmBVmSmowXldfl5alNKD-eQ5Oy9r0nDktCH75QzgzwES9kNfWkxUC2BHEzkb3QNfSmTVEjxG7lPMYH7mMq16EBxp34uF8O2SX"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="text-sm font-bold truncate group-hover:text-primary transition-colors">Grant disbursement stage 2 documentation</span>
+<span class="text-[11px] text-slate-500 font-medium">Domain: Incubation</span>
+</div>
+</div>
+</td>
+<td class="px-5 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 uppercase">In Progress</span>
+</td>
+<td class="px-5 py-4">
+<span class="inline-flex items-center gap-1 text-[11px] font-bold text-slate-600 dark:text-slate-400">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Medium
+                                        </span>
+</td>
+<td class="px-5 py-4">
+<span class="text-[11px] font-medium text-slate-500 whitespace-nowrap">5h ago</span>
+</td>
+</tr>
+<!-- Query 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer group">
+<td class="px-5 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Avatar of query requester 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJQJcnTxSt3XK6rU5Wuul3EB7sxqbUZhNsw-KMoxoYbPaCaX4_VblHbHgjwGOgpATSEJwJ0D3Ch_-0WtxYL2WL6OH3QqOR7VxbLTPHurtaBS7xP4FmbTpuPjEVmpfWNgCajNmBG3CP4xD4E9_x1lOCabheuao1YPF73FRSBx7nhrIrDJ_4DCp6yhYEysHCkd-LDMcWojeS3TSDDYtsk1XWGs7F9NObwudFaCwoN4I3nU-_Hq7LnzrMb55VOBgCi8Nqkzy7R7XYTXyy"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="text-sm font-bold truncate group-hover:text-primary transition-colors">Technical mentorship session request</span>
+<span class="text-[11px] text-slate-500 font-medium">Domain: Mentorship</span>
+</div>
+</div>
+</td>
+<td class="px-5 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 uppercase">Resolved</span>
+</td>
+<td class="px-5 py-4">
+<span class="inline-flex items-center gap-1 text-[11px] font-bold text-slate-400 dark:text-slate-500">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span> Low
+                                        </span>
+</td>
+<td class="px-5 py-4">
+<span class="text-[11px] font-medium text-slate-500 whitespace-nowrap">1d ago</span>
+</td>
+</tr>
+<!-- Query 4 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer group border-b-0">
+<td class="px-5 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Avatar of query requester 4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTpqIzMgalIYYSXVYXLMRWA87cYjZgQ--4dNUmOw0muInLuzE_tSrywXrl9N89QEyPjt46dsrrKQ9DCXgvdj9xIekd00HtlgLDe5qSSwVXKiiOxyvmZI_lpB4UtiL1Y6ZmnUGe0CkwE_v4mvarLtuaJJI9AasBBumsCgdT8rFSi2X-t2s-EFD3U9VLK5NYomW4aIt2Tffa0aIRQdDsV0XaRXkd_AZXSDKdVmlAs3yZJKgVvlW8YxTv2v8QzvFK_28MEaoVl_Hv-qim"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="text-sm font-bold truncate group-hover:text-primary transition-colors">Cloud credit activation issue</span>
+<span class="text-[11px] text-slate-500 font-medium">Domain: IT Services</span>
+</div>
+</div>
+</td>
+<td class="px-5 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 uppercase">Open</span>
+</td>
+<td class="px-5 py-4">
+<span class="inline-flex items-center gap-1 text-[11px] font-bold text-rose-600 dark:text-rose-400">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span> High
+                                        </span>
+</td>
+<td class="px-5 py-4">
+<span class="text-[11px] font-medium text-slate-500 whitespace-nowrap">2d ago</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Right: Queries by Domain (Bar Chart Style) -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg shadow-sm p-6 flex flex-col">
+<div class="flex items-center justify-between mb-8">
+<h4 class="font-bold text-slate-800 dark:text-white">Queries by Domain</h4>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer">info</span>
+</div>
+<div class="flex-1 space-y-6">
+<!-- Incubation -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold uppercase tracking-wider text-slate-500">
+<span>Incubation Support</span>
+<span>45%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-3 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 45%;"></div>
+</div>
+</div>
+<!-- Mentorship -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold uppercase tracking-wider text-slate-500">
+<span>Mentorship</span>
+<span>28%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-3 rounded-full overflow-hidden">
+<div class="bg-primary/80 h-full rounded-full" style="width: 28%;"></div>
+</div>
+</div>
+<!-- Legal & IP -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold uppercase tracking-wider text-slate-500">
+<span>Legal &amp; IP</span>
+<span>15%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-3 rounded-full overflow-hidden">
+<div class="bg-primary/60 h-full rounded-full" style="width: 15%;"></div>
+</div>
+</div>
+<!-- Facilities -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold uppercase tracking-wider text-slate-500">
+<span>Facilities</span>
+<span>12%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-3 rounded-full overflow-hidden">
+<div class="bg-primary/40 h-full rounded-full" style="width: 12%;"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 text-center">
+<p class="text-[11px] text-slate-400 font-medium">Domain statistics based on last 30 days activity</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>E-Cell IIT Bombay | Portal Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600;700" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2563EB",
+                        "navy-deep": "#0A1628",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .geometric-pattern {
+            background-color: #0a1628;
+            background-image: radial-gradient(#1e293b 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark min-h-screen">
+<div class="flex flex-col md:flex-row min-h-screen">
+<!-- Left Panel: Brand & Identity -->
+<div class="md:w-5/12 lg:w-4/12 bg-navy-deep relative overflow-hidden flex flex-col justify-between p-8 md:p-12 lg:p-16 geometric-pattern">
+<!-- Subtle Overlay Gradient -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none"></div>
+<!-- Top Logo Section -->
+<div class="relative z-10 flex items-center gap-3">
+<div class="bg-primary p-2 rounded-lg shadow-lg shadow-primary/20">
+<svg class="w-6 h-6 text-white" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h1 class="text-white text-xl font-bold tracking-tight">E-Cell IIT Bombay</h1>
+</div>
+<!-- Middle Content Section -->
+<div class="relative z-10 mt-12 md:mt-0">
+<h2 class="text-white text-4xl md:text-5xl font-extrabold leading-tight tracking-tight mb-4">
+                    Centralized Query <span class="text-primary">Management</span>
+</h2>
+<p class="text-slate-400 text-lg max-w-sm leading-relaxed">
+                    The official ecosystem portal for entrepreneurs and innovators at IIT Bombay. Streamlined support, resources, and communication.
+                </p>
+</div>
+<!-- Bottom Section (Visible on Desktop) -->
+<div class="relative z-10 hidden md:block">
+<div class="flex items-center gap-4 py-4 px-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10">
+<div class="flex -space-x-2">
+<img alt="User" class="h-8 w-8 rounded-full border-2 border-navy-deep" data-alt="Profile picture of a community member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ9kIQoorSW_6Lt7C0OO_dBCAtwKEUpgE2k4F5lHnbAxjU4g12WID0ksHsVhVMdN0Tb5jYrQ9RffQQXYA1eYjiVGJ_PXCSf19lO8RnpoXo2nAnTSGPyKhaElXMyD2QaC56ec2YhWdw1ZPoeWSZHTZ68sEcMxhv_eQmVDniVotvMECP7orCkhtFtz2QmjqyHH0p5OBcPMkJIRSALS-RliTVFJV4IMKwqaWixBb2OLUGfB6_5HrnYhULhlhY93C8gWmd70m5ZHvch7_V"/>
+<img alt="User" class="h-8 w-8 rounded-full border-2 border-navy-deep" data-alt="Profile picture of an entrepreneur" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwxh_im1Xk5ry3NaUVLTwQqekyJc7JkaI5RGQp3pEP7r2rh-Puvyu3bZ8guJz9kbWSr0ioaFThDLOwcEiL6Mr51lZ6rb3a1PTpz7Pjt2qH4PmluZ90CaPEf5HUtktQjEnFClG9T732X66VcaJmlu4RtSxqLc9nDls6SFVygf77PhqXdXp0_1vZYur_DvuK-H-qC5iMlvb5wjLxM8k7zYfS2x9BCbX7WlsknQnRWxR_EzYuZ7eoAo3eDftmUlKHUnKvbU5d0bgKJy4n"/>
+<img alt="User" class="h-8 w-8 rounded-full border-2 border-navy-deep" data-alt="Profile picture of a startup founder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTb385UPTkEjbmzyH29N_JQaS65zXk9qv8gP4lBOz7hmORqo0DY_OaKDc9GsiREyARYIw8-m9bVC08lvnZCY1o1joBM2thaXjEvOyXSxyWUsrhBlqJFUHjtAJOH0PzZkMSHghW6PBqbCPO_LXtLMQLHiLnLez-1_4etm1BKZRgDAiD0oXhHq07gQWqR74fkGjBZtzd4TqQ0wHKQ9V73aba4KyhOwDXa_F6pXsk07mFGKsD-rdCtGTDkOMVQLr4hYkxbgehAAg2wKBR"/>
+</div>
+<span class="text-slate-300 text-sm font-medium">Joined by 5000+ founders</span>
+</div>
+</div>
+</div>
+<!-- Right Panel: Form Section -->
+<div class="flex-1 bg-white dark:bg-background-dark flex items-center justify-center p-6 md:p-12 lg:p-24 overflow-y-auto">
+<div class="w-full max-w-[440px] space-y-8">
+<!-- Form Header -->
+<div>
+<h3 class="text-slate-900 dark:text-slate-100 text-3xl font-bold tracking-tight">Sign In</h3>
+<p class="text-slate-500 dark:text-slate-400 mt-2">
+                        Enter your credentials to access your dashboard.
+                    </p>
+</div>
+<!-- Form Content -->
+<form class="space-y-5">
+<div class="space-y-1.5">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Username</label>
+<div class="relative">
+<input class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none placeholder:text-slate-400" placeholder="john_doe" type="text" value="john_doe_invalid"/>
+</div>
+<p class="text-xs text-red-500 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">error</span>
+                            User not found in our records
+                        </p>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Password</label>
+<a class="text-xs font-semibold text-primary hover:underline" href="#">Forgot password?</a>
+</div>
+<div class="relative flex items-center">
+<input class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none placeholder:text-slate-400" placeholder="Enter password" type="password"/>
+<button class="absolute right-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary" id="remember" type="checkbox"/>
+<label class="text-sm text-slate-600 dark:text-slate-400" for="remember">Remember me for 30 days</label>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3.5 px-4 rounded-lg shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2" type="submit">
+<span>Sign In</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</form>
+<!-- Footer Links -->
+<div class="pt-6 border-t border-slate-100 dark:border-slate-800">
+<p class="text-center text-slate-600 dark:text-slate-400 text-sm">
+                        Don't have an account? 
+                        <a class="text-primary font-bold hover:underline ml-1" href="#register">Create account</a>
+</p>
+</div>
+<!-- Registration Modal/Section Preview (Hidden usually, but styled here for requirement) -->
+<div class="hidden mt-12 pt-12 border-t-2 border-dashed border-slate-200" id="register-preview">
+<h3 class="text-slate-900 text-2xl font-bold tracking-tight mb-6">Create Account</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1.5">
+<label class="text-sm font-semibold text-slate-700">First Name</label>
+<input class="w-full border border-slate-200 rounded-lg px-4 py-2" placeholder="Jane" type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-sm font-semibold text-slate-700">Last Name</label>
+<input class="w-full border border-slate-200 rounded-lg px-4 py-2" placeholder="Doe" type="text"/>
+</div>
+</div>
+<div class="space-y-1.5 mt-4">
+<label class="text-sm font-semibold text-slate-700">Email Address</label>
+<input class="w-full border border-red-500 rounded-lg px-4 py-2 bg-red-50" placeholder="jane@example.com" type="email"/>
+<p class="text-xs text-red-500 font-medium">Please enter a valid IIT Bombay email</p>
+</div>
+<div class="space-y-1.5 mt-4">
+<label class="text-sm font-semibold text-slate-700">Username</label>
+<input class="w-full border border-slate-200 rounded-lg px-4 py-2" placeholder="janedoe" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-4">
+<div class="space-y-1.5">
+<label class="text-sm font-semibold text-slate-700">Password</label>
+<input class="w-full border border-slate-200 rounded-lg px-4 py-2" type="password"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-sm font-semibold text-slate-700">Confirm Password</label>
+<input class="w-full border border-slate-200 rounded-lg px-4 py-2" type="password"/>
+</div>
+</div>
+<button class="w-full mt-6 bg-primary text-white font-bold py-3 rounded-lg">Register</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

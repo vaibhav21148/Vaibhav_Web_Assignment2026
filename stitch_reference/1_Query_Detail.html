@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Query Detail - E-Cell Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2463eb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">rocket_launch</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">E-Cell Portal</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-semibold text-primary" href="#">Queries</a>
+<a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Incubation</a>
+<a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Events</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary/50" placeholder="Search queries..." type="text"/>
+</div>
+<div class="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-300 dark:border-slate-600" data-alt="User profile avatar">
+<img alt="Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB62fNoLv6US1AflRZozsKDp9B_j-yEg4CcCojZTyk-Zqa2olztqFb3YcPXn8rCiHUTUeognDNAsPKPQs3ZS2zkemsrgSByKdFB0KENffu_PBGaMRCIJFg73MrOM7pnhsDgi4a-M2PHE0m5AKX2Fk6dPhV02a_X8Xi51XZXCmXoVMKxfx6uj0YUSKZ-rAuibvIGikh_bF0oEk55AAQsyBlERSlJKiLkj-Bl2-YhmIC2HZ8VoyMv8RkXlVyCdfere291f__gwSpjGMB-"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 py-8">
+<nav class="flex items-center gap-2 text-sm text-slate-500 mb-6">
+<a class="hover:text-primary" href="#">Home</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary" href="#">Support Queries</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-100 font-medium">QRY-8429</span>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="lg:col-span-8 space-y-8">
+<section>
+<div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+<h1 class="text-3xl font-black text-slate-900 dark:text-white leading-tight">Issue with Startup Registration Form</h1>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 text-xs font-bold rounded-full uppercase tracking-wider flex items-center gap-1">
+<span class="size-2 bg-amber-500 rounded-full"></span> High Priority
+                            </span>
+<span class="px-3 py-1 bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 text-xs font-bold rounded-full uppercase tracking-wider flex items-center gap-1">
+<span class="size-2 bg-blue-500 rounded-full"></span> Open
+                            </span>
+</div>
+</div>
+<div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-500 dark:text-slate-400 mb-6 border-b border-slate-200 dark:border-slate-800 pb-6">
+<div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">tag</span> QRY-8429</div>
+<div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">person</span> Ananya Sharma</div>
+<div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">schedule</span> 2 hours ago</div>
+<div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">domain</span> Tech Support</div>
+<div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">category</span> Registration</div>
+</div>
+<div class="prose dark:prose-invert max-w-none mb-8">
+<p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+                            The user is unable to upload the GST certificate in the final step of the registration. The system throws a <code class="bg-slate-100 dark:bg-slate-800 px-1 rounded">413 Payload Too Large</code> error even for files under 2MB. This is blocking multiple founders from completing their applications before the Sunday deadline.
+                        </p>
+</div>
+</section>
+<section class="space-y-6">
+<div class="flex items-center gap-4 border-b border-slate-200 dark:border-slate-800">
+<button class="px-4 py-3 border-b-2 border-primary text-primary font-bold text-sm">Discussion</button>
+<button class="px-4 py-3 border-b-2 border-transparent text-slate-500 font-bold text-sm hover:text-slate-700">Timeline</button>
+<button class="px-4 py-3 border-b-2 border-transparent text-slate-500 font-bold text-sm hover:text-slate-700">Activity</button>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-slate-200 overflow-hidden" data-alt="User avatar">
+<img alt="Ananya Sharma" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdpbrVEz6icn-l5PSVejepD5Oa7n3dgM88LQpLc0Df_GPh43V7wXuK-mtJER-edzG8Y547OC3kTRP7avEnfpNhUgzOesAXjiW34sE52g4okuCtYGxAUX1qONo_coq5LhmcYNtF7DYxHPw3a1KWN-BV6FaEUQ4K6RBPQLR2EnPig5_8i6zC5kOkAEr7KB6ijzi6l5XgoFZrd_1iHS6IMynW_q2YNuFyUV9jpIzmBifoznVvfA1jm9U6G-ssDv8WRpOKlpCOAncG_g2B"/>
+</div>
+<div class="flex-1">
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl rounded-tl-none shadow-sm border border-slate-200 dark:border-slate-700">
+<div class="flex justify-between items-center mb-2">
+<span class="font-bold text-sm">Ananya Sharma</span>
+<span class="text-xs text-slate-400">10:45 AM</span>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-300">I've tried multiple browsers (Chrome, Safari, Firefox) and the result is the same. The file is a standard PDF of 1.2MB.</p>
+</div>
+</div>
+</div>
+<div class="flex gap-4 pl-12">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg">support_agent</span>
+</div>
+<div class="flex-1 border-l-4 border-amber-400">
+<div class="bg-amber-50 dark:bg-amber-950/20 p-4 rounded-xl rounded-tl-none shadow-sm border border-slate-200 dark:border-slate-700">
+<div class="flex justify-between items-center mb-2">
+<div class="flex items-center gap-2">
+<span class="font-bold text-sm text-amber-900 dark:text-amber-200">System Bot</span>
+<span class="bg-amber-200 dark:bg-amber-800 text-[10px] font-bold px-1.5 py-0.5 rounded text-amber-800 dark:text-amber-100 uppercase">Internal Note</span>
+</div>
+<span class="text-xs text-slate-400">11:02 AM</span>
+</div>
+<p class="text-sm text-amber-800 dark:text-amber-300 font-medium">Auto-check: Server logs show Cloudflare is rejecting the request before it hits our backend. Checking WAF rules.</p>
+</div>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-slate-200 overflow-hidden" data-alt="Support agent avatar">
+<img alt="Rahul Verma" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQCCq6VBB9z8qVxIf0g5WIniqh1FWnFk0Wh9y37Me35bPtkTITtnHyrwqExfbWynSd7EnF2g0IvJXj8OuGHfZq-bCsvmzgiybsTmdW8-KRyqH-AVJS7wlgZSx_ti1gKH9ZJmLQRbAR9c54BvwEaY417-JVbf6uMMpOJ_w3hel8VUCecHiwVqf16Fy0CkeJWk3WU1LY8a9R7ZL76Or5a8nIkhrNQ6KKGn_NEbBNC9DJbQCNPZqDuzgQdzL1o8bO3LNGjFFHp0bqDwHr"/>
+</div>
+<div class="flex-1">
+<div class="bg-primary/5 dark:bg-primary/10 p-4 rounded-xl rounded-tl-none shadow-sm border border-primary/20">
+<div class="flex justify-between items-center mb-2">
+<span class="font-bold text-sm text-primary">Rahul Verma (Support)</span>
+<span class="text-xs text-slate-400">11:15 AM</span>
+</div>
+<p class="text-sm text-slate-700 dark:text-slate-200">Hi Ananya, we are looking into this. It seems like a temporary restriction on the file upload gateway. Will update you in 15 mins.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm">
+<textarea class="w-full min-h-[120px] bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg p-4 text-sm focus:ring-primary focus:border-primary" placeholder="Type your response here..."></textarea>
+<div class="flex flex-wrap items-center justify-between mt-4 gap-4">
+<div class="flex items-center gap-4">
+<label class="flex items-center gap-2 cursor-pointer select-none">
+<input class="w-4 h-4 text-primary rounded border-slate-300 focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">Mark as Internal Note</span>
+</label>
+<button class="flex items-center gap-1.5 text-slate-500 hover:text-primary transition-colors text-sm font-medium">
+<span class="material-symbols-outlined text-xl">attach_file</span>
+                                    Attach Files
+                                </button>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">send</span>
+                                Post Comment
+                            </button>
+</div>
+</div>
+</section>
+</div>
+<aside class="lg:col-span-4 space-y-6">
+<div class="sticky top-24 space-y-6">
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+<div class="px-5 py-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex justify-between items-center">
+<h3 class="font-bold text-slate-900 dark:text-white">Query Details</h3>
+<button class="material-symbols-outlined text-slate-400 hover:text-primary">settings</button>
+</div>
+<div class="p-5 space-y-6">
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Status</label>
+<select class="w-full bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-primary">
+<option>Open</option>
+<option>In Progress</option>
+<option>Pending Verification</option>
+<option>Resolved</option>
+<option>Closed</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Priority</label>
+<select class="w-full bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-primary">
+<option>Low</option>
+<option>Medium</option>
+<option selected="">High</option>
+<option>Critical</option>
+</select>
+</div>
+<div class="space-y-3">
+<label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Assigned To</label>
+<div class="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-900 rounded-lg border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden" data-alt="Assigned agent avatar">
+<img alt="Rahul Verma" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwO4NFvFzq8_Nt5BWM1kCKQOGkkqUaMl2tGd0eR8LK6Hb0eDd6V_TVu0vMwNFyJXaFjrw4hTVd3CScC1p6ewEkALNsR-uXtGsIKR_01nkuPm2wasKxD6CmuVuW-J8yGvvuwkRnqzOgiD56dYCzUd6Zp36VW2MhxFQUqIN3rb-ZSLAUk7Fp1qZhCEej4vJHRWHrGOhkLqvbX8YHK5nVDorAbABzy-WqjbJ71OidPQMUNvcpWtVwN0M_6ytbGDbU3pP_c1dwJW7jqV6R"/>
+</div>
+<div class="text-sm">
+<p class="font-bold leading-none">Rahul Verma</p>
+<p class="text-xs text-slate-500 mt-1">L2 Support</p>
+</div>
+</div>
+<button class="text-primary text-xs font-bold hover:underline">Reassign</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<p class="text-[10px] font-bold text-slate-500 uppercase">Domain</p>
+<p class="text-sm font-semibold">Tech Support</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] font-bold text-slate-500 uppercase">Category</p>
+<p class="text-sm font-semibold">Registration</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+<div class="px-5 py-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+<h3 class="font-bold text-slate-900 dark:text-white">Attachments (2)</h3>
+</div>
+<div class="p-4 space-y-3">
+<div class="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-900 rounded-lg hover:border-primary/30 border border-transparent transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-red-500">picture_as_pdf</span>
+<div class="overflow-hidden">
+<p class="text-xs font-bold truncate w-32">GST_Cert.pdf</p>
+<p class="text-[10px] text-slate-500">1.2 MB</p>
+</div>
+</div>
+<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">download</button>
+</div>
+<div class="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-900 rounded-lg hover:border-primary/30 border border-transparent transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-500">image</span>
+<div class="overflow-hidden">
+<p class="text-xs font-bold truncate w-32">Error_Screen.png</p>
+<p class="text-[10px] text-slate-500">450 KB</p>
+</div>
+</div>
+<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">download</button>
+</div>
+</div>
+</div>
+<button class="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-3 rounded-xl font-bold text-sm shadow-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">check_circle</span>
+                        Mark as Resolved
+                    </button>
+</div>
+</aside>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>E-Cell Portal - Admin Panel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2463eb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        .dark ::webkit-scrollbar-thumb { background: #334155; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased font-display">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">rocket_launch</span>
+</div>
+<h2 class="text-lg font-bold tracking-tight">E-Cell Portal</h2>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<div class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition-colors group">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg cursor-pointer transition-colors">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-semibold">User Management</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="text-sm font-medium">Queries</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
+<span class="material-symbols-outlined">terminal</span>
+<span class="text-sm font-medium">System Logs</span>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2">
+<img alt="Admin Avatar" class="size-9 rounded-full bg-slate-100" data-alt="User avatar for Felix, the super admin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWPlHaQ9x9Q6XK90zuXWoRSszsz2_TzTx9wQ49ZneLMXDVcQB9O_cq7ozM8Xtqu40cUaAXhkjoFGEL2OAizjSEjRTK3NhoqXB98Rb8nIgnD6TaJQU-oqVmjIwmWwMtF0PsQYjCiypOVztIeTUXZg-UcJmClJ-aCoc6hPm-Q7yCvPYRO2NNzUqh0fa_bQOtlk0IPtEZ106t80wt3rotwf8dCE_ksdoFEdr3lZ5mXCStVuh88g8TqN2znI0P4O6A_EnUL7xwRPg3zW-m"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Felix Admin</p>
+<p class="text-xs text-slate-500 truncate">Super Admin</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-lg">unfold_more</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md flex items-center justify-between px-8">
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="pl-9 pr-4 py-1.5 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search users, domains, roles..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-sm shadow-primary/20">
+<span class="material-symbols-outlined text-lg">person_add</span>
+                    Invite User
+                </button>
+<div class="h-6 w-px bg-slate-200 dark:border-slate-800"></div>
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- View Controls & Tabs -->
+<div class="px-8 pt-6">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h1 class="text-2xl font-bold tracking-tight">User Management</h1>
+<p class="text-slate-500 text-sm mt-1">Manage global access permissions and domain roles.</p>
+</div>
+<div class="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
+<button class="px-4 py-1.5 text-xs font-semibold rounded-md shadow-sm bg-white dark:bg-slate-700">List View</button>
+<button class="px-4 py-1.5 text-xs font-semibold rounded-md text-slate-500 dark:text-slate-400">Activity Log</button>
+</div>
+</div>
+<div class="flex border-b border-slate-200 dark:border-slate-800 gap-8">
+<button class="border-b-2 border-primary text-primary px-1 pb-3 text-sm font-semibold flex items-center gap-2">
+                    Users
+                    <span class="bg-primary/10 text-primary text-[10px] px-1.5 py-0.5 rounded-full">1,284</span>
+</button>
+<button class="border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 px-1 pb-3 text-sm font-medium transition-colors">
+                    All Queries
+                </button>
+</div>
+</div>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-auto p-8 pt-6">
+<!-- Stats Row -->
+<div class="grid grid-cols-4 gap-4 mb-8">
+<div class="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl">
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Total Users</p>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-2xl font-bold tracking-tight">1,284</span>
+<span class="text-emerald-500 text-xs font-bold">+12%</span>
+</div>
+</div>
+<div class="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl">
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Domain Managers</p>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-2xl font-bold tracking-tight">42</span>
+<span class="text-emerald-500 text-xs font-bold">+3%</span>
+</div>
+</div>
+<div class="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl">
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Active Sessions</p>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-2xl font-bold tracking-tight">156</span>
+<span class="text-rose-500 text-xs font-bold">-2%</span>
+</div>
+</div>
+<div class="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl">
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Pending Requests</p>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-2xl font-bold tracking-tight">12</span>
+<span class="text-emerald-500 text-xs font-bold">+5%</span>
+</div>
+</div>
+</div>
+<!-- Data Table -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">User</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Role</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Domain</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider text-center">Status</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<img alt="Avatar" class="size-8 rounded-full bg-slate-100 border border-slate-200 dark:border-slate-700" data-alt="Avatar for Alex, Super Admin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH-z-ff5YZ459gvCklO9e7TQXy55iAKX8V9cjFp1obMGhg9IAFCWVs5QR082fuP5WXwtL5xO4gKslDweE4lrV57ZSUBjB-gJqgl0m1FEBODFQB6l5IwkvDNa1iFLy7hVbbvY8UzB80HfDDVUt2hoqDxGpcajzNkr_WocuHx5isrRg0PNtVh4fE7AMX6znxH1q6T5ldb4JKpBMvSGTlP6Aj7LQVORHVDNQCISJkPM1g_kR1OHqk1xFvGTCzjaWVL2f75QeTqkv1bxsi"/>
+<div>
+<p class="text-sm font-semibold">Alex Riverstone</p>
+<p class="text-xs text-slate-500">alex@e-cell.org</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 uppercase">Super Admin</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-slate-600 dark:text-slate-400">Global</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-center">
+<button class="relative inline-flex h-5 w-9 items-center rounded-full bg-primary">
+<span class="translate-x-4 inline-block h-3.5 w-3.5 transform rounded-full bg-white transition shadow-sm"></span>
+</button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm">
+<div class="flex items-center justify-end gap-3">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="text-slate-400 hover:text-rose-500 transition-colors"><span class="material-symbols-outlined text-lg">block</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<img alt="Avatar" class="size-8 rounded-full bg-slate-100 border border-slate-200 dark:border-slate-700" data-alt="Avatar for Sarah, Domain Manager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANd945DpPwo5BUrXpgPjwgpjLGyIptYnwMEnhHsAUaa_twNuoN-PQY9nxHe84D4BICah62MEPN4GseMr34vgdglO5lOhLmnMNKUGSEOtEZ3I9EWXfz52YYMylRn0ILr6_0DK9x1ViEueAMHg5Fu9d-0J3onact8AmS7VkSp7TLvixjakjl79vKmgtFdH6cSQchnX3DvDG04PVtJTHJiA9gJVIJmEYcIXpl4nuObjAxLZzzDf77zJv4-mRDRpqqRvsH-jZGdm9fLy0I"/>
+<div>
+<p class="text-sm font-semibold">Sarah Jenkins</p>
+<p class="text-xs text-slate-500">s.jenkins@tech.ecell.org</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 uppercase">Domain Manager</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-slate-600 dark:text-slate-400">Technology</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-center">
+<button class="relative inline-flex h-5 w-9 items-center rounded-full bg-primary">
+<span class="translate-x-4 inline-block h-3.5 w-3.5 transform rounded-full bg-white transition shadow-sm"></span>
+</button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm">
+<div class="flex items-center justify-end gap-3">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="text-slate-400 hover:text-rose-500 transition-colors"><span class="material-symbols-outlined text-lg">block</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<img alt="Avatar" class="size-8 rounded-full bg-slate-100 border border-slate-200 dark:border-slate-700" data-alt="Avatar for Michael, Team Member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAERUqHZhG6B9mBMyIQffe4PQJWxJrXaXFnZO-vxgFiwbSchEYenEzc4Zd1pD3v1cSHANtvnLwiqWprkZI_4bGex2eDP0omCOMTkGUjoZbba2tnqatvQEixNgPvqnBrKIjfAmWM1QWdWhcd1racmymf99WCq9mou-pA2X0IgK8Q4DbijN3q0utrRNRn_xW8Y0MMKOx1UG6HvG5qva8dIgur7S77RZRPv9bKGNn2Ed0cLrzSh1_e5oM9Jf5DfcM8Sj_w5KsU0UraqafV"/>
+<div>
+<p class="text-sm font-semibold">Michael Vance</p>
+<p class="text-xs text-slate-500">vance.m@marketing.ecell.org</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 uppercase">Team Member</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-slate-600 dark:text-slate-400">Marketing</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-center">
+<button class="relative inline-flex h-5 w-9 items-center rounded-full bg-primary">
+<span class="translate-x-4 inline-block h-3.5 w-3.5 transform rounded-full bg-white transition shadow-sm"></span>
+</button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm">
+<div class="flex items-center justify-end gap-3">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="text-slate-400 hover:text-rose-500 transition-colors"><span class="material-symbols-outlined text-lg">block</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 4 (Inactive) -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors opacity-75">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<img alt="Avatar" class="size-8 rounded-full bg-slate-100 border border-slate-200 dark:border-slate-700 grayscale" data-alt="Avatar for Emily, Reporter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDcjtZx5dH_B9rHx36d-2YJZcmxah0bogVvQFmW06wxHiyLVtquwi5Jx2oSI9Ko_tZ06WtFZBZGxZjq1dIgp9f6nLium2BRSaOMo-K5LP_8i1mMe_jXdb-999017zrDlApwuvmPx3P3IZj3-TI2PNR5S4BIgUCt6cP6qk4wokLofHCHneCH-pK56zcQ_RF4M4Sd0ZJ06lh0YY1AY4lWK4D5lZK1Vh9jdYI7PggH3KAOtXxOchShY4xqMGPbKn9TwyA0gRWhALVlFZW"/>
+<div>
+<p class="text-sm font-semibold text-slate-400">Emily Blunt</p>
+<p class="text-xs text-slate-400">e.blunt@ecell.org</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-500 uppercase">Reporter</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-slate-400">Public Relations</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-center">
+<button class="relative inline-flex h-5 w-9 items-center rounded-full bg-slate-200 dark:bg-slate-700">
+<span class="translate-x-1 inline-block h-3.5 w-3.5 transform rounded-full bg-white transition shadow-sm"></span>
+</button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm">
+<div class="flex items-center justify-end gap-3">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="text-rose-500 transition-colors font-semibold">Activate</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<img alt="Avatar" class="size-8 rounded-full bg-slate-100 border border-slate-200 dark:border-slate-700" data-alt="Avatar for Rahul, Domain Manager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8exOjN13qWYwYegzwjxet7eNSzzFaZtvm0qIlf5XLjlKIT0MrEsECD6S7ZN9flAI85rrMt672FJun2dH-T_rX-zaOYecXLQyZWLVksKwF6oU8x059zlSRfzTxDeUaRlImuRpjRgTVs6-_wyMGt7q0Osmvzd8D0caw0yEX3hPDvFMR4PKKaY3k7-jjchQoC0bHWwR0MnGl098eYohFqm5drZ0TmG55w7p_ni8rEQQGkizTDrCtTU8s8wfpYu9SrUkNDK2e84GlbvE6"/>
+<div>
+<p class="text-sm font-semibold">Rahul Sharma</p>
+<p class="text-xs text-slate-500">rahul.s@ops.ecell.org</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 uppercase">Domain Manager</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-sm text-slate-600 dark:text-slate-400">Operations</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-center">
+<button class="relative inline-flex h-5 w-9 items-center rounded-full bg-primary">
+<span class="translate-x-4 inline-block h-3.5 w-3.5 transform rounded-full bg-white transition shadow-sm"></span>
+</button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm">
+<div class="flex items-center justify-end gap-3">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="text-slate-400 hover:text-rose-500 transition-colors"><span class="material-symbols-outlined text-lg">block</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<p class="text-xs text-slate-500 font-medium tracking-tight">Showing 1 to 5 of 1,284 users</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded text-xs font-semibold hover:bg-slate-50">Previous</button>
+<button class="px-3 py-1 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded text-xs font-semibold hover:bg-slate-50">Next</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Invite Slide-over (Hidden by default, represented visually) -->
+<div class="fixed inset-y-0 right-0 w-96 bg-white dark:bg-background-dark shadow-2xl border-l border-slate-200 dark:border-slate-800 transform transition-transform translate-x-full z-50">
+<!-- Slide-over content would go here -->
+</div>
+</div>
+</body></html>
