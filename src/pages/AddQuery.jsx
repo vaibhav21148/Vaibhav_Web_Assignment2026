@@ -1,206 +1,164 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+
+const API = 'http://localhost:8000/api'
+
+const DOMAINS     = ['Events', 'Marketing', 'Corporate Relations', 'Hospitality', 'Operations', 'Design', 'Web and Tech', 'Media']
+const PRIORITIES  = ['low', 'medium', 'high', 'critical']
+const CATEGORIES  = ['General', 'Registration', 'Payment', 'Technical', 'Events', 'Incubation', 'Other']
 
 export default function AddQuery() {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    title: '',
-    domain: '',
-    category: '',
-    priority: 'medium',
-    description: ''
-  });
+  const { token } = useAuth()
+  const navigate  = useNavigate()
+  const fileRef   = useRef()
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitting query:", formData);
-    alert("Query successfully raised! (Mock)");
-    navigate('/');
-  };
+  const [form, setForm] = useState({ title: '', description: '', domain: '', priority: 'medium', category: 'General' })
+  const [files,      setFiles]      = useState([])
+  const [dragging,   setDragging]   = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error,      setError]      = useState('')
+
+  const set = field => e => setForm(f => ({ ...f, [field]: e.target.value }))
+
+  function addFiles(newFiles) {
+    const valid = [...newFiles].filter(f => f.size <= 10 * 1024 * 1024)
+    setFiles(prev => [...prev, ...valid])
+  }
+  function removeFile(idx) { setFiles(f => f.filter((_, i) => i !== idx)) }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    if (!form.domain) { setError('Please select a domain.'); return }
+    setError('')
+    setSubmitting(true)
+    try {
+      const fd = new FormData()
+      Object.entries(form).forEach(([k, v]) => fd.append(k, v))
+      files.forEach(f => fd.append('files', f))
+      const res = await fetch(`${API}/queries/`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: fd,
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.message || JSON.stringify(data))
+      navigate(`/queries/${data.query.id}`, { replace: true })
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  const labelClass = "block text-sm font-medium text-slate-700 mb-1.5"
+  const inputClass = "w-full px-3.5 py-2.5 rounded-lg bg-white border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#2463eb] focus:ring-2 focus:ring-[#2463eb]/20 transition-all text-sm"
 
   return (
-    <div className="flex flex-col items-center py-4 px-4 sm:px-6 w-full">
-      <div className="w-full max-w-[700px] flex flex-col gap-6">
-        {/* Progress & Title Section */}
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <div className="flex justify-between items-end">
-              <span className="text-primary text-sm font-semibold uppercase tracking-wider">Step 1 of 1</span>
-              <span className="text-slate-500 text-xs font-medium">100% Complete</span>
-            </div>
-            <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden">
-              <div className="h-full bg-primary w-full rounded-full"></div>
-            </div>
+    <div className="p-6 lg:p-8 max-w-3xl mx-auto space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold text-slate-900">Create New Query</h1>
+        <p className="text-slate-500 text-sm mt-1">Submit your detailed request to the administrative team.</p>
+      </div>
+
+      {error && (
+        <div className="flex items-center gap-2 px-4 py-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
+          <span className="material-icons-round text-red-500 text-base">error</span>
+          {error}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Main Card */}
+        <div className="bg-white border border-slate-200 rounded-xl p-6 space-y-5">
+          <h2 className="font-semibold text-slate-900 text-base border-b border-slate-100 pb-4">Query Details</h2>
+
+          <div>
+            <label className={labelClass}>Query Title *</label>
+            <input type="text" required value={form.title} onChange={set('title')} placeholder="Brief one-line summary of the issue" className={inputClass} />
           </div>
-          <div className="pt-2">
-            <h1 className="text-3xl font-bold text-slate-900 w-full">Create New Query</h1>
-            <p className="text-slate-500 mt-1">Submit your detailed request to the administrative team.</p>
+
+          <div>
+            <label className={labelClass}>Description *</label>
+            <textarea required rows={5} value={form.description} onChange={set('description')}
+              placeholder="Describe your issue in detail. Include steps to reproduce, expected vs actual behaviour, and any error messages."
+              className={inputClass + ' resize-y'} />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label className={labelClass}>Domain *</label>
+              <select required value={form.domain} onChange={set('domain')} className={inputClass}>
+                <option value="">Select domain…</option>
+                {DOMAINS.map(d => <option key={d} value={d}>{d}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className={labelClass}>Priority</label>
+              <select value={form.priority} onChange={set('priority')} className={inputClass}>
+                {PRIORITIES.map(p => <option key={p} value={p}>{p.charAt(0).toUpperCase() + p.slice(1)}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className={labelClass}>Category</label>
+              <select value={form.category} onChange={set('category')} className={inputClass}>
+                {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+            </div>
           </div>
         </div>
 
-        {/* Form Container */}
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6 bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200">
-          
-          {/* Title Field */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-semibold text-slate-700" htmlFor="query-title">Query Title</label>
-            <input 
-              className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary p-3 transition-colors outline-none" 
-              id="query-title" 
-              placeholder="Enter a brief, descriptive title" 
-              type="text"
-              value={formData.title}
-              onChange={(e) => setFormData({...formData, title: e.target.value})}
-              required
-            />
+        {/* Attachments Card */}
+        <div className="bg-white border border-slate-200 rounded-xl p-6 space-y-4">
+          <h2 className="font-semibold text-slate-900 text-base border-b border-slate-100 pb-4">Attachments</h2>
+
+          {/* Drop Zone */}
+          <div
+            onDragOver={e => { e.preventDefault(); setDragging(true) }}
+            onDragLeave={() => setDragging(false)}
+            onDrop={e => { e.preventDefault(); setDragging(false); addFiles(e.dataTransfer.files) }}
+            onClick={() => fileRef.current.click()}
+            className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all ${dragging ? 'border-[#2463eb] bg-blue-50' : 'border-slate-200 hover:border-[#2463eb]/40 hover:bg-slate-50'}`}
+          >
+            <span className="material-icons-round text-3xl text-slate-300 block mb-2">cloud_upload</span>
+            <p className="text-sm font-medium text-slate-700">Drag and drop files here or <span className="text-[#2463eb]">browse</span></p>
+            <p className="text-xs text-slate-400 mt-1">Supported formats: PDF, DOCX, PNG, JPG (Max 10MB)</p>
+            <input ref={fileRef} type="file" multiple className="hidden" onChange={e => addFiles(e.target.files)} />
           </div>
 
-          {/* Grid for Domain and Category */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-semibold text-slate-700" htmlFor="domain">Domain</label>
-              <select 
-                className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary p-3 transition-colors outline-none cursor-pointer" 
-                id="domain"
-                value={formData.domain}
-                onChange={(e) => setFormData({...formData, domain: e.target.value})}
-                required
-              >
-                <option value="" disabled>Select domain</option>
-                <option value="tech">Technology & Infrastructure</option>
-                <option value="finance">Finance & Funding</option>
-                <option value="marketing">Marketing & Outreach</option>
-                <option value="operations">Operations & Events</option>
-              </select>
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-semibold text-slate-700" htmlFor="category">Category</label>
-              <input 
-                className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary p-3 transition-colors outline-none" 
-                id="category" 
-                placeholder="e.g. Sponsorship, Workshop" 
-                type="text"
-                value={formData.category}
-                onChange={(e) => setFormData({...formData, category: e.target.value})}
-              />
-            </div>
-          </div>
+          {/* File List */}
+          {files.length > 0 && (
+            <ul className="space-y-2">
+              {files.map((f, i) => (
+                <li key={i} className="flex items-center gap-3 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg">
+                  <span className="material-icons-round text-slate-400 text-[18px]">attachment</span>
+                  <span className="flex-1 text-sm font-medium text-slate-700 truncate">{f.name}</span>
+                  <span className="text-xs text-slate-400">{(f.size / 1024).toFixed(0)} KB</span>
+                  <button type="button" onClick={() => removeFile(i)} className="text-slate-400 hover:text-red-500 transition-colors">
+                    <span className="material-icons-round text-[18px]">close</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
-          {/* Priority Selection */}
-          <div className="flex flex-col gap-3">
-            <label className="text-sm font-semibold text-slate-700">Priority Level</label>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <label className="relative cursor-pointer">
-                <input 
-                  className="peer sr-only" 
-                  name="priority" 
-                  type="radio" 
-                  value="low"
-                  checked={formData.priority === 'low'}
-                  onChange={() => setFormData({...formData, priority: 'low'})}
-                />
-                <div className="flex items-center justify-center p-3 rounded-lg border-2 border-slate-200 bg-slate-50 peer-checked:border-slate-400 peer-checked:bg-slate-100 transition-all">
-                  <span className="text-sm font-medium text-slate-600">Low</span>
-                </div>
-              </label>
-
-              <label className="relative cursor-pointer">
-                <input 
-                  className="peer sr-only" 
-                  name="priority" 
-                  type="radio" 
-                  value="medium"
-                  checked={formData.priority === 'medium'}
-                  onChange={() => setFormData({...formData, priority: 'medium'})}
-                />
-                <div className="flex items-center justify-center p-3 rounded-lg border-2 border-slate-200 bg-slate-50 peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
-                  <span className="text-sm font-medium text-primary">Medium</span>
-                </div>
-              </label>
-
-              <label className="relative cursor-pointer">
-                <input 
-                  className="peer sr-only" 
-                  name="priority" 
-                  type="radio" 
-                  value="high"
-                  checked={formData.priority === 'high'}
-                  onChange={() => setFormData({...formData, priority: 'high'})}
-                />
-                <div className="flex items-center justify-center p-3 rounded-lg border-2 border-slate-200 bg-slate-50 peer-checked:border-amber-500 peer-checked:bg-amber-500/10 transition-all">
-                  <span className="text-sm font-medium text-amber-600">High</span>
-                </div>
-              </label>
-
-              <label className="relative cursor-pointer">
-                <input 
-                  className="peer sr-only" 
-                  name="priority" 
-                  type="radio" 
-                  value="critical"
-                  checked={formData.priority === 'critical'}
-                  onChange={() => setFormData({...formData, priority: 'critical'})}
-                />
-                <div className="flex items-center justify-center p-3 rounded-lg border-2 border-slate-200 bg-slate-50 peer-checked:border-red-500 peer-checked:bg-red-500/10 transition-all">
-                  <span className="text-sm font-medium text-red-600">Critical</span>
-                </div>
-              </label>
-            </div>
-          </div>
-
-          {/* Description */}
-          <div className="flex flex-col gap-2">
-            <div className="flex justify-between items-center">
-              <label className="text-sm font-semibold text-slate-700" htmlFor="description">Detailed Description</label>
-              <span className="text-xs text-slate-400">{formData.description.length} / 1000 characters</span>
-            </div>
-            <textarea 
-              className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary p-3 transition-colors outline-none resize-none" 
-              id="description" 
-              placeholder="Please provide all relevant details regarding your query..." 
-              rows="5"
-              maxLength={1000}
-              value={formData.description}
-              onChange={(e) => setFormData({...formData, description: e.target.value})}
-              required
-            ></textarea>
-          </div>
-
-          {/* File Upload */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-semibold text-slate-700">Attachments</label>
-            <div className="border-2 border-dashed border-slate-300 rounded-xl p-8 flex flex-col items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer">
-              <span className="material-symbols-outlined text-slate-400 text-4xl">cloud_upload</span>
-              <div className="text-center">
-                <p className="text-sm font-medium text-slate-700">Drag and drop files here or <span className="text-primary">browse</span></p>
-                <p className="text-xs text-slate-500 mt-1">Supported formats: PDF, DOCX, PNG, JPG (Max 10MB)</p>
-              </div>
-            </div>
-            {/* File Chips */}
-            <div className="flex flex-wrap gap-2 mt-2">
-              <div className="flex items-center gap-2 bg-primary/10 text-primary text-xs font-medium px-3 py-1.5 rounded-full border border-primary/20">
-                <span className="material-symbols-outlined text-sm">description</span>
-                <span>proposal_draft_v1.pdf</span>
-                <button className="hover:text-primary/70" type="button"><span className="material-symbols-outlined text-sm">close</span></button>
-              </div>
-              <div className="flex items-center gap-2 bg-primary/10 text-primary text-xs font-medium px-3 py-1.5 rounded-full border border-primary/20">
-                <span className="material-symbols-outlined text-sm">image</span>
-                <span>event_banner.jpg</span>
-                <button className="hover:text-primary/70" type="button"><span className="material-symbols-outlined text-sm">close</span></button>
-              </div>
-            </div>
-          </div>
-
-          {/* Submit Button */}
-          <div className="pt-4">
-            <button className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 text-lg" type="submit">
-              <span>Submit Query</span>
-              <span className="material-symbols-outlined">send</span>
+        {/* Actions */}
+        <div className="flex items-center justify-between">
+          <p className="text-xs text-slate-400">By submitting, you agree to our Terms of Service and Privacy Policy.</p>
+          <div className="flex items-center gap-3">
+            <button type="button" onClick={() => navigate(-1)} className="px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">Cancel</button>
+            <button type="submit" disabled={submitting}
+              className="flex items-center gap-2 px-5 py-2.5 bg-[#2463eb] text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-60">
+              {submitting ? (
+                <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />Submitting…</>
+              ) : (
+                <><span className="material-icons-round text-[18px]">send</span>Submit Query</>
+              )}
             </button>
-            <p className="text-center text-xs text-slate-500 mt-4">By submitting, you agree to our Terms of Service and Privacy Policy.</p>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
-  );
+  )
 }

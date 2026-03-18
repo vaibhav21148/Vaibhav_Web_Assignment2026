@@ -1,89 +1,75 @@
-import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
-export default function Sidebar({ isMobile, onClose }) {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
+const NAV_ITEMS = [
+  { to: '/', icon: 'dashboard', label: 'Dashboard', exact: true },
+  { to: '/my-queries', icon: 'format_list_bulleted', label: 'All Queries' },
+  { to: '/add-query', icon: 'add_circle', label: 'Create Query' },
+]
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+const ADMIN_ITEM = { to: '/admin', icon: 'admin_panel_settings', label: 'Admin Panel' }
+
+export default function Sidebar() {
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
+
+  function handleLogout() {
+    logout()
+    navigate('/login', { replace: true })
+  }
+
+  const isAdmin = user?.role === 'admin'
+
+  const linkClass = ({ isActive }) =>
+    `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
+      isActive
+        ? 'bg-[#2463eb] text-white'
+        : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+    }`
 
   return (
-    <aside className={`w-64 border-r border-slate-200 bg-white flex flex-col h-full transition-colors z-30 ${!isMobile ? 'fixed hidden md:flex' : 'flex'}`}>
-      <div className="p-6 flex items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <div className="bg-primary rounded-lg p-1.5 flex items-center justify-center">
-            <span className="material-symbols-outlined text-white text-2xl">hub</span>
-          </div>
-          <div className="flex flex-col">
-            <h1 className="text-sm font-bold tracking-tight uppercase text-slate-900">ResolvIT</h1>
-            <span className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase">Portal Management</span>
-          </div>
-        </div>
-        {isMobile && (
-          <button onClick={onClose} className="p-1 rounded-md hover:bg-slate-100 text-slate-500">
-            <span className="material-symbols-outlined">close</span>
-          </button>
-        )}
+    <aside className="flex flex-col w-64 shrink-0 bg-white border-r border-slate-200 h-screen sticky top-0 overflow-y-auto">
+      {/* Logo */}
+      <div className="flex items-center gap-2.5 h-16 px-5 border-b border-slate-200 shrink-0 mb-2">
+        <img src="/ecell_black.png" alt="E-Cell" className="h-7 object-contain" />
+        <span className="font-bold text-slate-900 text-lg">ResolvIT</span>
       </div>
 
-      <nav className="flex-1 px-3 space-y-1 overflow-y-auto">
-        <NavLink to="/" className={({ isActive }) => 
-          `flex items-center gap-3 px-3 py-2.5 rounded-r-lg transition-all group ${
-            isActive ? 'bg-primary/10 border-l-4 border-primary text-primary font-semibold' : 'text-slate-600 hover:bg-slate-100 rounded-lg'
-          }`
-        } end>
-          <span className="material-symbols-outlined text-[22px]">dashboard</span>
-          <span className="text-sm">Dashboard</span>
-        </NavLink>
-        
-        {user?.role === 'admin' && (
-          <NavLink to="/admin" className={({ isActive }) => 
-            `flex items-center gap-3 px-3 py-2.5 transition-all group ${
-              isActive ? 'bg-primary/10 border-l-4 border-primary text-primary font-semibold rounded-r-lg' : 'text-slate-600 hover:bg-slate-100 rounded-lg'
-            }`
-          }>
-            <span className="material-symbols-outlined text-[22px]">admin_panel_settings</span>
-            <span className="text-sm">Admin Panel</span>
+      {/* Nav */}
+      <nav className="flex-1 px-3 py-4 space-y-1">
+        {NAV_ITEMS.map(item => (
+          <NavLink key={item.to} to={item.to} end={item.exact} className={linkClass}>
+            <span className="material-icons-round text-[20px]">{item.icon}</span>
+            {item.label}
+          </NavLink>
+        ))}
+        {isAdmin && (
+          <NavLink to={ADMIN_ITEM.to} className={linkClass}>
+            <span className="material-icons-round text-[20px]">{ADMIN_ITEM.icon}</span>
+            {ADMIN_ITEM.label}
           </NavLink>
         )}
-
-        <NavLink to="/my-queries" className={({ isActive }) => 
-          `flex items-center gap-3 px-3 py-2.5 transition-all group ${
-            isActive ? 'bg-primary/10 border-l-4 border-primary text-primary font-semibold rounded-r-lg' : 'text-slate-600 hover:bg-slate-100 rounded-lg'
-          }`
-        }>
-          <span className="material-symbols-outlined text-[22px]">person_search</span>
-          <span className="text-sm">My Queries</span>
-        </NavLink>
-        
-        <NavLink to="/raise-issue" className={({ isActive }) => 
-          `flex items-center gap-3 px-3 py-2.5 transition-all group ${
-            isActive ? 'bg-primary/10 border-l-4 border-primary text-primary font-semibold rounded-r-lg' : 'text-slate-600 hover:bg-slate-100 rounded-lg'
-          }`
-        }>
-          <span className="material-symbols-outlined text-[22px]">add_circle</span>
-          <span className="text-sm">Create Query</span>
-        </NavLink>
-        
-        <div className="pt-4 pb-2 px-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Management</div>
       </nav>
 
-      <div className="p-4 border-t border-slate-200">
-        <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 cursor-pointer transition-colors" onClick={handleLogout}>
-          <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center shrink-0">
-             <span className="font-bold text-slate-600 text-xs">{user?.name?.charAt(0) || 'U'}</span>
+      {/* User footer */}
+      <div className="px-3 py-4 border-t border-slate-200 shrink-0">
+        <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1">
+          <div className="w-8 h-8 rounded-full bg-[#2463eb]/10 flex items-center justify-center text-[#2463eb] font-bold text-sm uppercase shrink-0">
+            {user?.name?.slice(0, 2) || 'U'}
           </div>
-          <div className="flex flex-col min-w-0 flex-1">
-            <span className="text-xs font-bold truncate text-slate-900">{user?.name || 'User'}</span>
-            <span className="text-[10px] text-slate-500 truncate capitalize">Logout</span>
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-slate-900 truncate">{user?.name || 'User'}</p>
+            <p className="text-xs text-slate-500 capitalize">{user?.role || 'user'}</p>
           </div>
-          <span className="material-symbols-outlined text-slate-400 text-lg ml-auto">logout</span>
         </div>
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-red-50 hover:text-red-600 transition-all"
+        >
+          <span className="material-icons-round text-[20px]">logout</span>
+          Sign Out
+        </button>
       </div>
     </aside>
-  );
+  )
 }

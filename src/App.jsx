@@ -1,66 +1,28 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './context/AuthContext';
-import MainLayout from './components/layout/MainLayout';
-import Auth from './pages/Auth';
-import Dashboard from './pages/Dashboard';
-import AddQuery from './pages/AddQuery';
-import MyQueries from './pages/MyQueries';
-import QueryDetail from './pages/QueryDetail';
-import AdminPanel from './pages/AdminPanel';
+import { Routes, Route, Navigate } from 'react-router-dom'
 
-const ProtectedRoute = ({ children, allowedRoles }) => {
-  const { user } = useAuth();
+import ProtectedRoute from './components/layout/ProtectedRoute'
+import LoadingScreen  from './components/layout/LoadingScreen'
+import AppShell       from './components/layout/HomePage'
+import LoginPage      from './pages/Login'
+import RegisterPage   from './pages/Register'
+import { useAuth }    from './context/AuthContext'
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
+export default function App() {
+  const { loading } = useAuth()
+  if (loading) return <LoadingScreen />
 
-  if (allowedRoles && !allowedRoles.includes(user.role)) {
-    return <Navigate to="/" replace />;
-  }
-
-  return children;
-};
-
-const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/login" element={<Auth />} />
-      
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <MainLayout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<Dashboard />} />
-        <Route path="my-queries" element={<MyQueries />} />
-        <Route path="raise-issue" element={<AddQuery />} />
-        <Route path="query/:id" element={<QueryDetail />} />
-        <Route 
-          path="admin" 
-          element={
-            <ProtectedRoute allowedRoles={['admin']}>
-              <AdminPanel />
-            </ProtectedRoute>
-          } 
-        />
-      </Route>
+      <Route path="/login"    element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+
+      <Route path="/"            element={<ProtectedRoute><AppShell page="dashboard" /></ProtectedRoute>} />
+      <Route path="/my-queries"  element={<ProtectedRoute><AppShell page="my-queries" /></ProtectedRoute>} />
+      <Route path="/add-query"   element={<ProtectedRoute><AppShell page="add" /></ProtectedRoute>} />
+      <Route path="/queries/:id" element={<ProtectedRoute><AppShell page="query" /></ProtectedRoute>} />
+      <Route path="/admin"       element={<ProtectedRoute><AppShell page="admin" /></ProtectedRoute>} />
+
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
-  );
-};
-
-function App() {
-  return (
-    <BrowserRouter>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
-    </BrowserRouter>
-  );
+  )
 }
-
-export default App;
