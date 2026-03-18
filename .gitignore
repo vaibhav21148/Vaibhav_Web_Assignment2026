@@ -11,8 +11,6 @@ node_modules
 dist
 dist-ssr
 *.local
-.env
-.env.*
 !.env.example
 
 
@@ -26,3 +24,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+config.bat
